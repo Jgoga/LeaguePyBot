@@ -14,22 +14,27 @@ bounding_box ={'left': 0, 'top': 0, 'width': 1920, 'height': 1080}
 ratio = 1
 sct = mss()
 patterns = [
-            # 'patterns/unit/champion.png',
-            # 'patterns/unit/tower.png',
-            # 'patterns/unit/tower2.png',
-            # 'patterns/unit/building.png',
-            # 'patterns/unit/minion.png',
-            # 'patterns/player/player.png',
-            # 'patterns/player/half.png',
-            # 'patterns/player/low.png',
+            'patterns/unit/champion.png',
+            'patterns/unit/tower.png',
+            'patterns/unit/tower2.png',
+            'patterns/unit/building.png',
+            'patterns/unit/minion.png',
+            'patterns/player/player.png',
+            'patterns/player/half.png',
+            'patterns/player/low.png',
             # 'patterns/unit/towerattack.png'
             # 'patterns/minimap/ahri.png',
             # 'patterns/minimap/ahri2.png',
             # 'patterns/minimap/ahri3.png',
             # 'patterns/shop/start.png',
             # 'patterns/shop/open.png',
-            # 'patterns/shop/blightingjewel.png'
-            'patterns/matchmaking/ok.png'
+            # 'patterns/shop/blightingjewel.png',
+            # 'patterns/matchmaking/play.png',
+            # 'patterns/matchmaking/ai.png',
+            # 'patterns/matchmaking/beginner.png',
+            # 'patterns/matchmaking/matchmaking.png',
+            # 'patterns/matchmaking/confirm.png',
+            # 'patterns/matchmaking/rematch.png'
             ]
 
 
@@ -47,7 +52,7 @@ def template_match(img_bgr, pattern):
     name = pattern.split('/')[-1].split('.')[0]
     width = int(template.shape[1]/ratio)
     height = int(template.shape[0]/ratio)
-    template = cv2.resize(template, (width,height))
+    # template = cv2.resize(template, (width,height))
     res = cv2.matchTemplate(img, template, cv2.TM_CCOEFF_NORMED)
     threshold = 0.90
     if name == 'minion': threshold = 0.99
@@ -71,7 +76,7 @@ def mark_the_spot(sct_img, pt, width, height, name):
         x += int((width * ratio / 2) + pt[0])
         y += int((height * ratio / 2) + pt[1])
         color = tuple(int(x) for x in sct_img[y][x])
-        cv2.circle(sct_img, (pt[0], y), 10, (255,255,0), 3)
+        cv2.circle(sct_img, (x, y), 10, (0,255,0), 5)
         # if color[0] > 120: #blue
         # elif color[2] > 120: #red
         if name == 'low':
@@ -94,9 +99,9 @@ def mark_the_spot(sct_img, pt, width, height, name):
 
 
 def main():
-    p = Process(target=listen_k)
-    p.start()
-    p.join()
+    # p = Process(target=listen_k)
+    # p.start()
+    # p.join()
     loop_time = time.time()
 
     while True:
@@ -113,9 +118,9 @@ def main():
                     if name == 'minion':
                         pos_minion_list.append(pt)
 
-                print(f"{counter} elts for {name}")
+                    print(f"[FPS {round(1 / (time.time() - loop_time), 2)}] - Counter for {name} is {counter}")
+
         
-        print(f"minions position : {pos_minion_list}")
         # pos_safer_minion = min(pos_minion_list,key=lambda item:item[0])
         # pos_safe_player = (pos_safer_minion[0]-50, pos_safer_minion[1]+50) 
         # pos_danger_minion = max(pos_minion_list,key=lambda item:item[0])
@@ -125,7 +130,7 @@ def main():
         cv2.imshow('screen', sct_img)
 
 
-        print('FPS {}'.format(round(1 / (time.time() - loop_time), 2)))
+        # print('FPS {}'.format(round(1 / (time.time() - loop_time), 2)))
         loop_time = time.time()
 
         if (cv2.waitKey(1) & 0xFF) == ord('q'):
@@ -133,32 +138,32 @@ def main():
             break
 
 
-class Keystroke_Watcher(object):
-    def __init__(self):
-        self.hm = HookManager()
-        self.hm.KeyDown = self.on_keyboard_event
-        self.hm.HookKeyboard()
+# class Keystroke_Watcher(object):
+#     def __init__(self):
+#         self.hm = HookManager()
+#         self.hm.KeyDown = self.on_keyboard_event
+#         self.hm.HookKeyboard()
 
 
-    def on_keyboard_event(self, event):
-        try:
-            if event.KeyID  == 75: #K
-                self.stop_script()
-        finally:
-            return True
+#     def on_keyboard_event(self, event):
+#         try:
+#             if event.KeyID  == 75: #K
+#                 self.stop_script()
+#         finally:
+#             return True
 
-    def stop_script(self):
-        print(f'Exiting script...') #, file=open(logfile, 'a'))
-        sys.exit("User has requested to exit the script")
+#     def stop_script(self):
+#         print(f'Exiting script...') #, file=open(logfile, 'a'))
+#         sys.exit("User has requested to exit the script")
 
-    def shutdown(self):
-        PostQuitMessage(0)
-        self.hm.UnhookKeyboard()
+#     def shutdown(self):
+#         PostQuitMessage(0)
+#         self.hm.UnhookKeyboard()
 
 
-def listen_k():
-    watcher = Keystroke_Watcher()
-    PumpMessages()
+# def listen_k():
+#     watcher = Keystroke_Watcher()
+#     PumpMessages()
 
 
 if __name__ == '__main__':
