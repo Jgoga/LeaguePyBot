@@ -18,77 +18,79 @@ import gc
 pydirectinput.FAILSAFE = False
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
+RATIO = 1
+
 # Client
-CLIENT_BOX = {'left': 320, 'top': 180, 'width': 1280, 'height': 720}
-CLIENT_LOGIN_BOX = {'left': 480, 'top': 200, 'width': 100, 'height': 150}
-CLIENT_PLAY_BOX = {'left': 330, 'top': 160, 'width': 200, 'height': 80}
-CLIENT_MATCHMAKING_BOX = {'left': 730, 'top': 820, 'width': 250, 'height': 100}
-CLIENT_GGSCREEN_BOX = {'left': 800, 'top': 200, 'width': 300, 'height': 60}
-CLIENT_GGNEXT_BOX = {'left': 920, 'top': 780, 'width': 100, 'height': 100}
+CLIENT_BOX = {'left': int(320/RATIO), 'top': int(180/RATIO), 'width': int(1280/RATIO), 'height': int(720/RATIO)}
+CLIENT_LOGIN_BOX = {'left': int(480/RATIO), 'top': int(200/RATIO), 'width': int(100/RATIO), 'height': int(150/RATIO)}
+CLIENT_PLAY_BOX = {'left': int(330/RATIO), 'top': int(160/RATIO), 'width': int(200/RATIO), 'height': int(80/RATIO)}
+CLIENT_MATCHMAKING_BOX = {'left': int(730/RATIO), 'top': int(820/RATIO), 'width': int(250/RATIO), 'height': int(100/RATIO)}
+CLIENT_GGSCREEN_BOX = {'left': int(800/RATIO), 'top': int(200/RATIO), 'width': int(300/RATIO), 'height': int(60/RATIO)}
+CLIENT_GGNEXT_BOX = {'left': int(920/RATIO), 'top': int(780/RATIO), 'width': int(100/RATIO), 'height': int(100/RATIO)}
 
 # In-game
-EOG_BOX = {'left': 860, 'top': 600, 'width': 200, 'height': 80}
-FIGHT_BOX = {'left': 300, 'top': 0, 'width': 1620, 'height': 800}
-START_BOX = {'left': 1000, 'top': 300, 'width': 600, 'height': 400}
-SHOP_BOX = {'left': 350, 'top': 130, 'width': 730, 'height': 760}
-SHOP_OPEN_BOX = {'left': 350, 'top': 775, 'width': 90, 'height': 95}
-SHOP_CONSUMABLE_BOX = {'left': 375, 'top': 195, 'width': 45, 'height': 295}
-SHOP_STARTER_BOX = {'left': 505, 'top': 330, 'width': 275, 'height': 60}
-SHOP_BOOTS_BOX = {'left': 375, 'top': 530, 'width': 45, 'height': 215}
-SHOP_BASIC_BOX = {'left': 500, 'top': 440, 'width': 500, 'height': 70}
-SHOP_EPIC_BOX = {'left': 500, 'top': 560, 'width': 500, 'height': 145}
-SHOP_LEGENDARY_BOX = {'left': 500, 'top': 750, 'width': 555, 'height': 70}
-GOLD_BOX = {'left': 1200, 'top': 1045, 'width': 90, 'height': 22}
-INVENTORY_BOX = {'left': 1130, 'top': 940, 'width': 190, 'height': 100}
-MINIMAP_BOX = {'left': 1640, 'top': 800, 'width': 280, 'height': 280}
-MINIMAP_CORNER_BOX = {'left': 1630, 'top': 790, 'width': 60, 'height': 60}
-PLAYER_BOX = {'left': 660, 'top': 200, 'width': 600, 'height': 400}
+EOG_BOX = {'left': int(860/RATIO), 'top': int(600/RATIO), 'width': int(200/RATIO), 'height': int(80/RATIO)}
+FIGHT_BOX = {'left': int(300/RATIO), 'top': int(0/RATIO), 'width': int(1620/RATIO), 'height': int(800/RATIO)}
+START_BOX = {'left': int(1000/RATIO), 'top': int(300/RATIO), 'width': int(600/RATIO), 'height': int(400/RATIO)}
+SHOP_BOX = {'left': int(350/RATIO), 'top': int(130/RATIO), 'width': int(730/RATIO), 'height': int(760/RATIO)}
+SHOP_OPEN_BOX = {'left': int(350/RATIO), 'top': int(775/RATIO), 'width': int(90/RATIO), 'height': int(95/RATIO)}
+SHOP_CONSUMABLE_BOX = {'left': int(375/RATIO), 'top': int(195/RATIO), 'width': int(45/RATIO), 'height': int(295/RATIO)}
+SHOP_STARTER_BOX = {'left': int(505/RATIO), 'top': int(330/RATIO), 'width': int(275/RATIO), 'height': int(60/RATIO)}
+SHOP_BOOTS_BOX = {'left': int(375/RATIO), 'top': int(530/RATIO), 'width': int(45/RATIO), 'height': int(215/RATIO)}
+SHOP_BASIC_BOX = {'left': int(500/RATIO), 'top': int(440/RATIO), 'width': int(500/RATIO), 'height': int(70/RATIO)}
+SHOP_EPIC_BOX = {'left': int(500/RATIO), 'top': int(560/RATIO), 'width': int(500/RATIO), 'height': int(145/RATIO)}
+SHOP_LEGENDARY_BOX = {'left': int(500/RATIO), 'top': int(750/RATIO), 'width': int(555/RATIO), 'height': int(70/RATIO)}
+GOLD_BOX = {'left': int(1200/RATIO), 'top': int(1045/RATIO), 'width': int(90/RATIO), 'height': int(22/RATIO)}
+INVENTORY_BOX = {'left': int(1130/RATIO), 'top': int(940/RATIO), 'width': int(190/RATIO), 'height': int(100/RATIO)}
+MINIMAP_BOX = {'left': int(1640/RATIO), 'top': int(800/RATIO), 'width': int(280/RATIO), 'height': int(280/RATIO)}
+MINIMAP_CORNER_BOX = {'left': int(1630/RATIO), 'top': int(790/RATIO), 'width': int(60/RATIO), 'height': int(60/RATIO)}
+PLAYER_BOX = {'left': int(660/RATIO), 'top': int(200/RATIO), 'width': int(600/RATIO), 'height': int(400/RATIO)}
 
-ILLAOI_ITEMS = [{'name': 'doranblade', 'price': 450, 'bought': False, 'box': SHOP_STARTER_BOX, 'pos': (695,350)},
-                {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (400,215)},
-                {'name': 'ward', 'price': 0, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (400,290)},
-                {'name': 'longsword', 'price': 350, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (640,465)},
-                {'name': 'rubycrystal', 'price': 400, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (700,465)},
-                {'name': 'phage', 'price': 350, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (1030,585)},
-                {'name': 'sheen', 'price': 700, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (530,585)},
-                {'name': 'rubycrystal', 'price': 400, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (700,465)},
-                {'name': 'kindledgem', 'price': 400, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (695,585)},
-                {'name': 'divine', 'price': 700, 'bought': False, 'box': SHOP_BOX, 'pos': (615,775)},
-                {'name': 'boots', 'price': 300, 'bought': False, 'box': SHOP_BOOTS_BOX, 'pos': (400,555)},
-                {'name': 'clotharmor', 'price': 300, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (530,465)},
-                {'name': 'platedboots', 'price': 500, 'bought': False, 'box': SHOP_BOOTS_BOX, 'pos': (400,700)},
-                {'name': 'longsword', 'price': 350, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (640,465)},
-                {'name': 'rubycrystal', 'price': 400, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (700,465)},
-                {'name': 'phage', 'price': 350, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (1030,585)},
-                {'name': 'pickaxe', 'price': 875, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (865,465)},
-                {'name': 'rubycrystal', 'price': 400, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (700,465)},
-                {'name': 'sterak', 'price': 725, 'bought': False, 'box': SHOP_LEGENDARY_BOX, 'pos': (925,775)},
-                {'name': 'pickaxe', 'price': 875, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (865,465)},
-                {'name': 'tiamat', 'price': 325, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (640,655)},
-                {'name': 'longsword', 'price': 350, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (640,465)},
-                {'name': 'vampscepter', 'price': 550, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (810,585)},
-                {'name': 'ravenous', 'price': 1200, 'bought': False, 'box': SHOP_LEGENDARY_BOX, 'pos': (1035,775)},
-                {'name': 'hammer', 'price': 1100, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (585,655)},
-                {'name': 'deathdance', 'price': 200, 'bought': False, 'box': SHOP_LEGENDARY_BOX, 'pos': (865,775)}]
+ILLAOI_ITEMS = [{'name': 'doranblade', 'price': 450, 'bought': False, 'box': SHOP_STARTER_BOX, 'pos': (int(695/RATIO),int(350/RATIO))},
+                {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (int(400/RATIO),int(215/RATIO))},
+                {'name': 'ward', 'price': 0, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (int(400/RATIO),int(290/RATIO))},
+                {'name': 'longsword', 'price': 350, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (int(640/RATIO),int(465/RATIO))},
+                {'name': 'rubycrystal', 'price': 400, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (int(700/RATIO),int(465/RATIO))},
+                {'name': 'phage', 'price': 350, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (int(1030/RATIO),int(585/RATIO))},
+                {'name': 'sheen', 'price': 700, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (int(530/RATIO),int(585/RATIO))},
+                {'name': 'rubycrystal', 'price': 400, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (int(700/RATIO),int(465/RATIO))},
+                {'name': 'kindledgem', 'price': 400, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (int(695/RATIO),int(585/RATIO))},
+                {'name': 'divine', 'price': 700, 'bought': False, 'box': SHOP_BOX, 'pos': (int(615/RATIO),int(775/RATIO))},
+                {'name': 'boots', 'price': 300, 'bought': False, 'box': SHOP_BOOTS_BOX, 'pos': (int(400/RATIO),int(555/RATIO))},
+                {'name': 'clotharmor', 'price': 300, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (int(530/RATIO),int(465/RATIO))},
+                {'name': 'platedboots', 'price': 500, 'bought': False, 'box': SHOP_BOOTS_BOX, 'pos': (int(400/RATIO),int(700/RATIO))},
+                {'name': 'longsword', 'price': 350, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (int(640/RATIO),int(465/RATIO))},
+                {'name': 'rubycrystal', 'price': 400, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (int(700/RATIO),int(465/RATIO))},
+                {'name': 'phage', 'price': 350, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (int(1030/RATIO),int(585/RATIO))},
+                {'name': 'pickaxe', 'price': 875, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (int(865/RATIO),int(465/RATIO))},
+                {'name': 'rubycrystal', 'price': 400, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (int(700/RATIO),int(465/RATIO))},
+                {'name': 'sterak', 'price': 725, 'bought': False, 'box': SHOP_LEGENDARY_BOX, 'pos': (int(925/RATIO),int(775/RATIO))},
+                {'name': 'pickaxe', 'price': 875, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (int(865/RATIO),int(465/RATIO))},
+                {'name': 'tiamat', 'price': 325, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (int(640/RATIO),int(655/RATIO))},
+                {'name': 'longsword', 'price': 350, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (int(640/RATIO),int(465/RATIO))},
+                {'name': 'vampscepter', 'price': 550, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (int(810/RATIO),int(585/RATIO))},
+                {'name': 'ravenous', 'price': 1200, 'bought': False, 'box': SHOP_LEGENDARY_BOX, 'pos': (int(1035/RATIO),int(775/RATIO))},
+                {'name': 'hammer', 'price': 1100, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (int(585/RATIO),int(655/RATIO))},
+                {'name': 'deathdance', 'price': 200, 'bought': False, 'box': SHOP_LEGENDARY_BOX, 'pos': (int(865/RATIO),int(775/RATIO))}]
 
-AHRI_ITEMS = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': SHOP_STARTER_BOX, 'pos': (695,350)},
-                {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (400,215)},
-                {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (400,215)},
-                {'name': 'ward', 'price': 0, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (400,290)},
-                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (755,465)},
-                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (755,465)},
-                {'name': 'lostchapter', 'price': 430, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (530,660)},
-                {'name': 'blastingwand', 'price': 850, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (925,465)},
-                {'name': 'luden', 'price': 1250, 'bought': False, 'box': SHOP_BOX, 'pos': (550,400)},
-                {'name': 'boots', 'price': 300, 'bought': False, 'box': SHOP_BOOTS_BOX, 'pos': (400,550)},
-                {'name': 'sorcerershoes', 'price': 800, 'bought': False, 'box': SHOP_BOOTS_BOX, 'pos': (400,630)},
-                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (755,465)},
-                {'name': 'blastingwand', 'price': 850, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (925,465)},
-                {'name': 'akuma', 'price': 1715, 'bought': False, 'box': SHOP_BOX, 'pos': (550,775)},
-                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (755,465)},
-                {'name': 'armguard', 'price': 465, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (811,580)},
-                {'name': 'zhonya', 'price': 1600, 'bought': False, 'box': SHOP_LEGENDARY_BOX, 'pos': (700,775)},
-                {'name': 'bansheeveil', 'price': 2500, 'bought': False, 'box': SHOP_LEGENDARY_BOX, 'pos': (755,775)}]
+AHRI_ITEMS = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': SHOP_STARTER_BOX, 'pos': (int(695/RATIO),int(350/RATIO))},
+                {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (int(400/RATIO),int(215/RATIO))},
+                {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (int(400/RATIO),int(215/RATIO))},
+                {'name': 'ward', 'price': 0, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (int(400/RATIO),int(290/RATIO))},
+                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (int(755/RATIO),int(465/RATIO))},
+                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (int(755/RATIO),int(465/RATIO))},
+                {'name': 'lostchapter', 'price': 430, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (int(530/RATIO),int(660/RATIO))},
+                {'name': 'blastingwand', 'price': 850, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (int(925/RATIO),int(465/RATIO))},
+                {'name': 'luden', 'price': 1250, 'bought': False, 'box': SHOP_BOX, 'pos': (int(550/RATIO),int(400/RATIO))},
+                {'name': 'boots', 'price': 300, 'bought': False, 'box': SHOP_BOOTS_BOX, 'pos': (int(400/RATIO),int(550/RATIO))},
+                {'name': 'sorcerershoes', 'price': 800, 'bought': False, 'box': SHOP_BOOTS_BOX, 'pos': (int(400/RATIO),int(630/RATIO))},
+                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (int(755/RATIO),int(465/RATIO))},
+                {'name': 'blastingwand', 'price': 850, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (int(925/RATIO),int(465/RATIO))},
+                {'name': 'akuma', 'price': 1715, 'bought': False, 'box': SHOP_BOX, 'pos': (int(550/RATIO),int(775/RATIO))},
+                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (int(755/RATIO),int(465/RATIO))},
+                {'name': 'armguard', 'price': 465, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (int(811/RATIO),int(580/RATIO))},
+                {'name': 'zhonya', 'price': 1600, 'bought': False, 'box': SHOP_LEGENDARY_BOX, 'pos': (int(700/RATIO),int(775/RATIO))},
+                {'name': 'bansheeveil', 'price': 2500, 'bought': False, 'box': SHOP_LEGENDARY_BOX, 'pos': (int(755/RATIO),int(775/RATIO))}]
 
 
 # Global variables
@@ -100,7 +102,6 @@ current_screen = 'unknown'
 last_screen = 'unknown'
 game_state = 'start'
 sct = mss()
-ratio = 1
 
 ## LOGGING
 
@@ -184,8 +185,8 @@ def listen_k():
 # Screenshots
 def capture_window(bounding_box):
     sct_img = sct.grab(bounding_box)
-    width = int(bounding_box['width']/ratio)
-    height = int(bounding_box['height']/ratio)
+    width = bounding_box['width']
+    height = bounding_box['height']
     sct_img_resized = cv2.resize(np.array(sct_img),(width,height))
     del sct_img
     gc.collect()
@@ -220,9 +221,9 @@ def template_match(img_bgr, template_img):
     img_gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
     template = cv2.imread(template_img, 0)
     name = template_img.split('/')[-1].split('.')[0]
-    width = int(template.shape[1]/ratio)
-    height = int(template.shape[0]/ratio)
-    # template = cv2.resize(template, (width,height))
+    width = int(template.shape[1]/RATIO)
+    height = int(template.shape[0]/RATIO)
+    template = cv2.resize(template, (width,height))
     res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
     threshold = 0.90
     if name == 'minion': threshold = 0.99
@@ -238,8 +239,8 @@ def template_match(img_bgr, template_img):
         y += pt[1]
         break
     if x != 0 and y != 0:
-        x += width * ratio / 2
-        y += height * ratio / 2
+        x += width * RATIO / 2
+        y += height * RATIO / 2
 
     del img_bgr
     del img_gray
@@ -255,8 +256,8 @@ def mark_the_spot(sct_img, pt, width, height, name):
     y = 0
     side = None
     if pt[0] != 0 and pt[1] != 0:
-        x += int((width * ratio / 2) + pt[0])
-        y += int((height * ratio / 2) + pt[1])
+        x += int((width * RATIO / 2) + pt[0])
+        y += int((height * RATIO / 2) + pt[1])
         color = tuple(int(x) for x in sct_img[y][x])
         if color[0] > 120 and color[2] < 120: side = "ally"
         elif color[2] > 120 and color[0] < 120: side = "enemy"
