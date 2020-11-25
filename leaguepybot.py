@@ -120,6 +120,8 @@ def log_timestamp():
 
 # Move the mouse to coordinates
 def move_mouse(x, y):
+    x = int(x/RATIO)
+    y = int(y/RATIO)
     try:
         win32api.SetCursorPos((x,y))
     except:
@@ -129,6 +131,8 @@ def move_mouse(x, y):
 # Left click
 def left_click(x, y):
     move_mouse(x, y)
+    x = int(x/RATIO)
+    y = int(y/RATIO)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,0,0)
     time.sleep(0.1)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
@@ -137,6 +141,8 @@ def left_click(x, y):
 # Right click
 def right_click(x, y):
     move_mouse(x, y)
+    x = int(x/RATIO)
+    y = int(y/RATIO)
     win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTDOWN,0,0)
     time.sleep(0.1)
     win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP,0,0)
@@ -643,13 +649,13 @@ def farm_lane():
             # pos_riskier_ally_minion = max(pos_ally_minion,key=lambda item:item[0])
             risky_minions = []
             for pos_one_ally in pos_ally_minion:
-                pos_x = int((pos_one_ally[0] / 1920)*100)
-                pos_y = 100 - int((pos_one_ally[1] / 1080)*100)
+                pos_x = int((pos_one_ally[0] / int(1920/RATIO))*100)
+                pos_y = 100 - int((pos_one_ally[1] / int(1080/RATIO))*100)
                 risky_minions.append(int((pos_x + pos_y) / 2))
             # max(enumerate(a), key=lambda x: x[1])[0]
             pos_riskier_ally_minion = pos_ally_minion[risky_minions.index(max(risky_minions))]
             print(f"{log_timestamp()} pos_riskier_ally_minion: {pos_riskier_ally_minion}", file=open(LOGFILE, 'a'))
-            pos_safe_player = (max(pos_safer_ally_minion[0]-50, 0), min(pos_safer_ally_minion[1]+50, 1080))
+            pos_safe_player = (max(pos_safer_ally_minion[0]-int(50/RATIO), int(0/RATIO)), min(pos_safer_ally_minion[1]+int(50/RATIO), int(1080/RATIO)))
             print(f"{log_timestamp()} pos_safe_player: {pos_safe_player}", file=open(LOGFILE, 'a'))
         if nb_enemy_minion > 0:
             pos_closest_enemy_minion = min(pos_enemy_minion,key=lambda item:item[0])
@@ -702,7 +708,7 @@ def farm_lane():
                 attack_position(*pos_closest_enemy_minion, spelltarget=pos_median_enemy_minion, q=True)
 
         # if no enemies follow minions
-        elif nb_ally_minion > 0 and (pos_riskier_ally_minion[0] > 960 or pos_riskier_ally_minion[1] < 450):
+        elif nb_ally_minion > 0 and (pos_riskier_ally_minion[0] > int(960/RATIO) or pos_riskier_ally_minion[1] < int(450/RATIO)):
             print(f'{log_timestamp()} follow ally minions', file=open(LOGFILE, 'a'))
             pydirectinput.keyDown('shift')
             right_click(*pos_riskier_ally_minion)
