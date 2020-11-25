@@ -120,8 +120,6 @@ def log_timestamp():
 
 # Move the mouse to coordinates
 def move_mouse(x, y):
-    x = int(x/RATIO)
-    y = int(y/RATIO)
     try:
         win32api.SetCursorPos((x,y))
     except:
@@ -131,8 +129,6 @@ def move_mouse(x, y):
 # Left click
 def left_click(x, y):
     move_mouse(x, y)
-    x = int(x/RATIO)
-    y = int(y/RATIO)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,0,0)
     time.sleep(0.1)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
@@ -141,8 +137,6 @@ def left_click(x, y):
 # Right click
 def right_click(x, y):
     move_mouse(x, y)
-    x = int(x/RATIO)
-    y = int(y/RATIO)
     win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTDOWN,0,0)
     time.sleep(0.1)
     win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP,0,0)
@@ -231,11 +225,11 @@ def template_match(img_bgr, template_img):
     height = int(template.shape[0]/RATIO)
     template = cv2.resize(template, (width,height))
     res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
-    threshold = 0.90
-    if name == 'minion': threshold = 0.99
-    if 'tower' in name: threshold = 0.85
-    if 'shop' in template_img: threshold = 0.95
-    if 'inventory' in template_img: threshold = 0.85
+    threshold = 0.89
+    if name == 'minion': threshold = 0.98
+    if 'tower' in name: threshold = 0.84
+    if 'shop' in template_img: threshold = 0.94
+    if 'inventory' in template_img: threshold = 0.84
     if name == 'start' or name == 'ward': threshold = 0.80
     loc = np.where(res > threshold)
     x = 0
@@ -271,7 +265,7 @@ def mark_the_spot(sct_img, pt, width, height, name):
         if name == 'low':
             offset = 0
             yellow_pixels = []
-            while offset < 25:
+            while offset < int(25/RATIO):
                 color = tuple(int(x) for x in sct_img[y][pt[0]-offset])
                 if color[0] < 100 and color[1] > 150 and color[2] > 150:
                     print(f"{log_timestamp()} Low life pixel color match {color} at position ({y},{pt[0]-offset}) and offset {offset}...", file=open(LOGFILE, 'a'))
@@ -314,7 +308,7 @@ def screen_watcher():
 
 # Login sequence
 def login():
-    left_click(x=400, y=420)
+    left_click(x=int(400/RATIO), y=int(420/RATIO))
     counter = 1
     while True:
         if counter == 1:
@@ -340,7 +334,7 @@ def screen_sequence(path, steps):
         print(f"{log_timestamp()} Next click is {step}", file=open(LOGFILE, 'a'))
         left_click(*look_for(CLIENT_BOX, path+step+'.png'))
         time.sleep(0.1)
-        left_click(1070,710) # Accept key fragment reward
+        left_click(int(1070/RATIO),int(710/RATIO)) # Accept key fragment reward
         time.sleep(0.1)
 
 # Click the menus to go to the correct matchmaking
@@ -359,10 +353,10 @@ def matchup():
             left_click(*look_for(CLIENT_BOX, 'patterns/client/matchmaking.png'))
 
         if lookup(CLIENT_BOX, 'patterns/client/accept.png') != (0,0):
-            left_click(955, 750)
+            left_click(int(955/RATIO), int(750/RATIO))
 
         elif lookup(CLIENT_BOX, 'patterns/client/pickerror.png') != (0,0):
-            left_click(960, 550)
+            left_click(int(960/RATIO), int(550/RATIO))
 
         elif lookup(CLIENT_BOX, 'patterns/client/lock.png') != (0,0):
             print(f"{log_timestamp()} Sequence Champselect...", file=open(LOGFILE, 'a'))
@@ -404,18 +398,18 @@ def postmatch():
     while True:
         if lookup(CLIENT_GGNEXT_BOX, 'patterns/client/ggnext.png') != (0,0):
             print(f"{log_timestamp()} GG someone...", file=open(LOGFILE, 'a'))
-            left_click(590,550)
+            left_click(int(590/RATIO),int(550/RATIO))
         elif lookup(CLIENT_BOX, 'patterns/client/ok.png') != (0,0):
             print(f"{log_timestamp()} Found a post end game OK button to click...", file=open(LOGFILE, 'a'))
             pydirectinput.press('space')
         elif lookup(CLIENT_BOX, 'patterns/client/rematch.png') != (0,0):
             print(f"{log_timestamp()} Found the rematch button to click, exiting loop...", file=open(LOGFILE, 'a'))
-            left_click(765,865)
-            left_click(765,845)
+            left_click(int(765/RATIO),int(865/RATIO))
+            left_click(int(765/RATIO),int(845/RATIO))
             break
         else: # Lazy method to pick a champ reward
             print(f"{log_timestamp()} Just clicking at 1385, 570...", file=open(LOGFILE, 'a'))
-            left_click(1385,570)
+            left_click(int(1385/RATIO),int(570/RATIO))
         time.sleep(1)
 
 ## GAMEPLAY
@@ -472,16 +466,16 @@ def buy_item(item):
         if lookup(SHOP_OPEN_BOX, 'patterns/shop/open.png') == (0,0):
             print(f"{log_timestamp()} Opening shop..", file=open(LOGFILE, 'a'))
             pydirectinput.press('p')
-        left_click(755,155)
+        left_click(int(755/RATIO),int(155/RATIO))
         print(f"{log_timestamp()} Buying {item['name']}", file=open(LOGFILE, 'a'))
         if item['name'] in ['akuma', 'luden', 'divine']:
-            left_click(545,155)
+            left_click(int(545/RATIO),int(155/RATIO))
             time.sleep(0.5)
             right_click(*item['pos'])
             time.sleep(0.5)
         else:
             right_click(*item['pos'])
-        left_click(755,155)
+        left_click(int(755/RATIO),int(155/RATIO))
         if last_screen != 'ingame':
             break
         elif lookup(INVENTORY_BOX, 'patterns/inventory/'+item['name']+'.png') != (0,0):
@@ -500,7 +494,7 @@ def buy_item(item):
 # Go back to lane, check if camera lock is on
 def go_toplane():
     pydirectinput.keyDown('shift')
-    right_click(1675, 890)
+    right_click(int(1675/RATIO), int(890/RATIO))
     pydirectinput.keyUp('shift')
     print(f"{log_timestamp()} Going toplane...", file=open(LOGFILE, 'a'))
     print(f"{log_timestamp()} Sleep 25sc while walking...", file=open(LOGFILE, 'a'))
@@ -529,7 +523,7 @@ def level_up_abilities():
 # Go back to base and shop
 def back_and_recall():
     pydirectinput.keyUp('shift')
-    right_click(1665, 1060)
+    right_click(int(1665/RATIO), int(1060/RATIO))
     pydirectinput.press('f')
     pydirectinput.press('g')
     pydirectinput.press('s')
@@ -539,7 +533,7 @@ def back_and_recall():
     buy_from_shop(shop_list)
 
 # Retreat
-def fall_back(x=1680, y=890, timer=0):
+def fall_back(x=int(1680/RATIO), y=int(890/RATIO), timer=0):
     pydirectinput.keyUp('shift')
     pydirectinput.press('s')
     right_click(x, y)
@@ -572,7 +566,7 @@ def average_tuple_list(tuple_list):
 def end_of_game():
     print(f'{log_timestamp()} End of game button', file=open(LOGFILE, 'a'))
     time.sleep(1)
-    left_click(960, 640)
+    left_click(int(960/RATIO), int(640/RATIO))
 
 # Main loop to look for patterns and decide how to fight
 def farm_lane():
@@ -592,17 +586,17 @@ def farm_lane():
         start_point = False
         nb_enemy_minion = 0
         pos_enemy_minion = []
-        pos_closest_enemy_minion = (960,540)
+        pos_closest_enemy_minion = (int(960/RATIO),int(540/RATIO))
         nb_enemy_champion = 0
         pos_enemy_champion = (0, 0)
         nb_enemy_tower = 0
         nb_ally_tower = 0
         nb_ally_minion = 0
         pos_ally_minion = []
-        pos_safer_ally_minion = (960,540)
-        pos_riskier_ally_minion = (960,540)
-        pos_safe_player = (960,540)
-        pos_median_enemy_minion = (960,540)
+        pos_safer_ally_minion = (int(960/RATIO),int(540/RATIO))
+        pos_riskier_ally_minion = (int(960/RATIO),int(540/RATIO))
+        pos_safe_player = (int(960/RATIO),int(540/RATIO))
+        pos_median_enemy_minion = (int(960/RATIO),int(540/RATIO))
 
         level_up_abilities()
 
@@ -691,7 +685,7 @@ def farm_lane():
             if nb_ally_minion == 0  or (nb_ally_minion <= 2 and nb_enemy_tower > 0) or (nb_enemy_tower > 0 and nb_enemy_champion > 0) or nb_enemy_champion > 3:
                 print(f'{log_timestamp()} falling back', file=open(LOGFILE, 'a'))
                 fall_back(timer=2)
-                attack_position(960, 540)
+                attack_position(int(960/RATIO), int(540/RATIO))
 
             # primarily attack champions
             elif nb_enemy_champion > 0:
